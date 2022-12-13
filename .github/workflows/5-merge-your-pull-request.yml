@@ -31,12 +31,23 @@ jobs:
     # We'll run Ubuntu for performance instead of Mac or Windows
     runs-on: ubuntu-latest
 
+    env:
+      NEW_BRANCH: step-x
+
     steps:
       # We'll need to check out the repository so that we can edit the README
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Let's get all the branches
+
+      - name: Create step-x branch
+        runs: |
+          echo "Make a branch"
+          git checkout -b $NEW_BRANCH
+
+          echo "Push"
+          git push --set-upstream origin $NEW_BRANCH
 
       # TODO: figure out a better way to deal with the lock on `main`
       # Update README to close <details id=5> and open <details id=X>
@@ -47,4 +58,13 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           from_step: 5
           to_step: X
+          base_branch_name: $NEW_BRANCH
           branch_name: ci
+
+      - name: Create a pull request
+        runs: |
+          echo "Make a pull request"
+          # Reference https://cli.github.com/manual/gh_pr_create
+          gh pr create --title "Update to step X" --body "Update to step X"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
