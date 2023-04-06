@@ -5,7 +5,7 @@
   Add your open source license, GitHub uses Creative Commons Attribution 4.0 International.
 -->
 
-# Continuous Integration
+# Test with Actions
 
 _Create workflows that enable you to use Continuous Integration (CI) for your projects._
 
@@ -77,12 +77,12 @@ First, let's add a workflow to lint our Markdown files in this repository.
 1. Update the workflow to remove all steps other than the "checkout" step.
 1. Add the following step to your workflow:
    ```yaml
-      - name: Run markdown lint
-        run: |
-          npm install remark-cli remark-preset-lint-consistent
-          npx remark . --use remark-preset-lint-consistent --frail
+        - name: Run markdown lint
+          run: |
+            npm install remark-cli remark-preset-lint-consistent
+            npx remark . --use remark-preset-lint-consistent --frail
    ```
-   > We expect this to create a error build. We'll fix this in the next step.
+   > Even after the code is indented properly in `ci.yml`, you will see a build error in GitHub Actions. We'll fix this in the next step.
 1. Click **Start commit**, and choose to make a new branch named `ci`.
 1. Click **Propose a new file**.
 1. Click **Create pull request**.
@@ -194,7 +194,7 @@ Protected branches ensure that collaborators on your repository cannot make irre
 1. Go to **Branches** settings. You can navigate to that page manually by clicking on the right-most tab in the top of the repository called **Settings** and then clicking on **Branches**.
 1. Click on **Add rule** under "Branch protection rules".
 1. Type `main` in **Branch name pattern**.
-1. Check **Require pull request reviews before merging**.
+1. Check **Require a pull request before merging**.
 1. Check **Require status checks to pass before merging**.
 1. Check all build and test jobs that you'd like to see in the newly visible gray box.
 1. Click **Create**.
@@ -265,4 +265,4 @@ Here's a recap of all the tasks you've accomplished in your repository:
 
 Get help: [Post in our discussion board](https://github.com/skills/.github/discussions) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
 
-&copy; 2022 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [CC-BY-4.0 License](https://creativecommons.org/licenses/by/4.0/legalcode)
+&copy; 2022 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
